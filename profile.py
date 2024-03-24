@@ -14,15 +14,18 @@ import geni.rspec.pg as pg
 pc = portal.Context()
 
 # Create a Request object to start building the RSpec.
-request = pc.makeRequestRSpec()
+rspec = pg.Request()
  
 # Add a raw PC to the request.
-node = request.RawPC("node")
+node = pg.RawPC("node")
 
 # Install and execute a script that is contained in the repository.
-node.addService(pg.Execute(shell="sh", command="echo \"...Initializing node...\""))
-node.addService(pg.Execute(shell="sh", command="chmod +x /local/repository/setup.sh"))
-node.addService(pg.Execute(shell="sh", command="/local/repository/setup.sh"))
+node.addService(pg.Execute(shell="bash", command="echo \"...Initializing node...\""))
+node.addService(pg.Execute(shell="sh", command="echo \"...Initializing node sh...\""))
+# node.addService(pg.Execute(shell="bash", command="chmod +x /local/repository/setup.sh"))
+# node.addService(pg.Execute(shell="bash", command="/local/repository/setup.sh"))
 
 # Print the RSpec to the enclosing page.
-pc.printRequestRSpec(request)
+rspec.addResource(node)
+
+pc.printRequestRSpec(rspec)
