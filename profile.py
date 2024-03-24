@@ -15,7 +15,7 @@ request = portal.context.makeRequestRSpec()
 node = request.RawPC("node")
 
 # Install and execute a script that is contained in the repository.
-node.addService(pg.Execute(shell="sh", command="/local/repository/setup.sh"))
+node.addService(rspec.Execute(shell="sh", command="/local/repository/setup.sh"))
 
 # Print the RSpec to the enclosing page.
-pc.printRequestRSpec(request)
+portal.context.printRequestRSpec(request)
